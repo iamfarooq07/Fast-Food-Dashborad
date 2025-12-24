@@ -14,38 +14,44 @@ const users = [
 
 export default function UsersPage() {
   return (
-    <div className="min-h-screen bg-blue-50 p-6">
-      <Card className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-xl">
-        <CardHeader className=" rounded-t-xl">
-          <CardTitle className="text-white text-xl">All Users</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <table className="w-full text-left border-collapse">
-            <thead className="bg-gray-500 text-white">
-              <tr>
-                <th className="px-4 py-3">Avatar</th>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id} className="border-b hover:bg-blue-50">
-                  <td className="px-4 py-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  </td>
-                  <td className="px-4 py-3 font-medium">{user.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{user.email}</td>
-                  <td className="px-4 py-3 font-semibold">{user.role}</td>
+    <div>
+      <h2 className="text-2xl font-bold my-15">Users Overview</h2>
+      <div className="h-full bg-black p-6">
+        <Card className="w-full max-w-6xl mx-auto bg-gray-800 text-white shadow-lg rounded-xl">
+          <CardHeader className=" rounded-t-xl">
+            <CardTitle className="text-white text-xl">All Users</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <table className="w-full text-left border-collapse">
+              <thead className="bg-gray-500 text-white">
+                <tr>
+                  <th className="px-4 py-3">Avatar</th>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">Role</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr
+                    key={user.id}
+                    className="border-b hover:bg-gray-100 hover:text-black"
+                  >
+                    <td className="px-4 py-3">
+                      <Avatar className="h-10 w-10 text-black">
+                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                    </td>
+                    <td className="px-4 py-3 font-medium">{user.name}</td>
+                    <td className="px-4 py-3 ">{user.email}</td>
+                    <td className="px-4 py-3 font-semibold">{user.role}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

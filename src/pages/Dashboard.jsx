@@ -3,32 +3,32 @@ import RevenueChart from "../components/dashboard/RevenueChart";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-black p-3">
       <h2 className="text-2xl font-semibold">Dashboard Overview</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+        <Card className="bg-gray-800 text-white">
           <CardHeader>
             <CardTitle>Total Users</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-bold">1,240</CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800 text-white">
           <CardHeader>
             <CardTitle>Revenue</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-bold">$12,430</CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800 text-white">
           <CardHeader>
             <CardTitle>Orders</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-bold">320</CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800 text-white">
           <CardHeader>
             <CardTitle>Growth</CardTitle>
           </CardHeader>

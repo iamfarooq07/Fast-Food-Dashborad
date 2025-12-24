@@ -6,7 +6,7 @@ import { useState } from "react";
 // Simple Label component
 function Label({ htmlFor, children }) {
   return (
-    <label htmlFor={htmlFor} className="block font-medium text-gray-700">
+    <label htmlFor={htmlFor} className="block font-medium text-white">
       {children}
     </label>
   );
@@ -36,13 +36,14 @@ export default function SettingsPage() {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Settings</h1>
+    <div className="min-h-screen bg-black p-6">
+      <h1 className="text-3xl font-bold mb-6 text-white">Settings</h1>
 
       {/* Account Settings Card */}
-      <Card className="max-w-3xl mx-auto mb-6 shadow-lg rounded-xl">
-        <CardHeader className="bg-blue-600 rounded-t-xl">
+      <Card className="max-w-3xl mx-auto mb-6 shadow-lg rounded-xl bg-gray-800">
+        <CardHeader className="rounded-t-xl">
           <CardTitle className="text-white text-lg">Account Settings</CardTitle>
+          <hr />
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col md:flex-row md:items-center gap-4">
@@ -66,7 +67,7 @@ export default function SettingsPage() {
             />
           </div>
           <div className="flex justify-end">
-            <Button className="bg-blue-600 text-white hover:bg-blue-700">
+            <Button className="bg-gray-600 text-white hover:bg-gray-700">
               Save Changes
             </Button>
           </div>
@@ -74,20 +75,19 @@ export default function SettingsPage() {
       </Card>
 
       {/* Preferences Card */}
-      <Card className="max-w-3xl mx-auto shadow-lg rounded-xl">
-        <CardHeader className="bg-green-600 rounded-t-xl">
+      <Card className="max-w-3xl mx-auto shadow-lg rounded-xl bg-gray-800">
+        <CardHeader className="rounded-t-xl">
           <CardTitle className="text-white text-lg">Preferences</CardTitle>
+          <hr />
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">
-              Enable Notifications
-            </span>
+            <span className="text-white font-medium">Enable Notifications</span>
             <Switch checked={notifications} onChange={setNotifications} />
           </div>
 
           <div className="flex justify-end">
-            <Button className="bg-green-600 text-white hover:bg-green-700">
+            <Button className="bg-gray-600 text-white hover:bg-gray-700">
               Save Preferences
             </Button>
           </div>
