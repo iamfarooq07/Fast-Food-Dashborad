@@ -6,13 +6,10 @@ import DashboardData from "./DashboardData";
 function App() {
   return (
     <div>
-      {/* <DashboardData />
-      <Login />
-      <Sign /> */}
       <Routes>
         <Route path="/" element={<Sign />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashborad" element={<DashboardData />} />
+        <Route path="/dashboard/*" element={<DashboardData />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -11,29 +12,25 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
 
   const signUp = async (e) => {
-    e.preventDefault();
+    e.preventDefault(e);
     setLoading(true);
-    setErrorMsg("");
-    setSuccessMsg("");
 
     const { error } = await supabase.auth.signUp({
       email,
       password,
     });
-
-    if (error) {
-      setErrorMsg(error.message);
-    } else {
-      setSuccessMsg(
-        "Account created successfully. Please check your email for verification."
-      );
-    }
-
     setLoading(false);
+    if (error) {
+      toast.error(error.message, {
+        autoClose: 1000,
+      });
+    } else {
+      toast.success("Please check your email for verification.", {
+        autoClose: 1500,
+      });
+    }
   };
 
   return (
@@ -75,20 +72,10 @@ function SignUp() {
 
       <button
         type="submit"
-        disabled={loading}
         className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 disabled:bg-blue-400"
       >
-        {loading ? "Creating account..." : "Sign Up"}
+        {loading ? "Signing up..." : "Sign Up"}
       </button>
-
-      {errorMsg && (
-        <p className="text-red-600 mt-4 text-center font-medium">{errorMsg}</p>
-      )}
-      {successMsg && (
-        <p className="text-green-600 mt-4 text-center font-medium">
-          {successMsg}
-        </p>
-      )}
 
       <p className="text-center text-gray-500 mt-6">
         Already have an account?{" "}

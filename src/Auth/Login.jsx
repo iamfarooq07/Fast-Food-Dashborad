@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -12,23 +13,25 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
 
   const login = async (e) => {
-    e.preventDefault();
+    e.preventDefault(e);
     setLoading(true);
-    setErrorMsg("");
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
+    setLoading(false);
     if (error) {
-      setErrorMsg(error.message);
+      toast.error(error.message, {
+        autoClose: 1000,
+      });
     } else {
-      console.log("Login successful");
-      navigate("/dashborad");
+      toast.success("Login successful", {
+        autoClose: 800,
+      });
+      navigate("/dashboard");
     }
 
     setLoading(false);
@@ -73,15 +76,10 @@ function Login() {
 
       <button
         type="submit"
-        disabled={loading}
         className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 disabled:bg-blue-400"
       >
-        {loading ? "Logging in..." : "Login"}
+        {loading ? "logged in..." : "Login"}
       </button>
-
-      {errorMsg && (
-        <p className="text-red-600 mt-4 text-center font-medium">{errorMsg}</p>
-      )}
 
       <p className="text-center text-gray-500 mt-6">
         Don't have an account?{" "}
