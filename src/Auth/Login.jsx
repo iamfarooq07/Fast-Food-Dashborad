@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { MagicCard } from "@/components/ui/magic-card";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -10,84 +22,76 @@ const supabase = createClient(
 
 function Login() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const login = async (e) => {
-    e.preventDefault(e);
+    e.preventDefault();
     setLoading(true);
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    setLoading(false);
-    if (error) {
-      toast.error(error.message, {
-        autoClose: 1000,
-      });
-    } else {
-      toast.success("Login successful", {
-        autoClose: 800,
-      });
-      navigate("/dashboard");
-    }
 
     setLoading(false);
+
+    if (error) {
+      toast.error(error.message, { autoClose: 1000 });
+    } else {
+      toast.success("Login successful", { autoClose: 800 });
+      navigate("/dashboard");
+    }
   };
 
   return (
-    <form
-      onSubmit={login}
-      className="max-w-md mx-auto mt-16 p-8 bg-gray-800 shadow-md rounded-lg"
-    >
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <Card className="w-full max-w-sm border-none p-0 shadow-none">
+        <MagicCard className="p-4 bg-gray-800">
+          <CardHeader className="border-b p-4 text-center text-3xl font-bold">
+            <CardTitle>Login</CardTitle>
+          </CardHeader>
 
-      <div className="mb-4">
-        <label className="block mb-1 font-medium text-white" htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+          <form onSubmit={login}>
+            <CardContent className="p-4 space-y-4">
+              <div>
+                <Label className="mb-2 text-lg">Email</Label>
+                <Input
+                  type="email"
+                  placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
-      <div className="mb-6">
-        <label className="block mb-1 font-medium text-white" htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+              <div>
+                <Label className="mb-2 text-lg">Password</Label>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </CardContent>
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 disabled:bg-blue-400"
-      >
-        {loading ? "logged in..." : "Login"}
-      </button>
-
-      <p className="text-center text-gray-500 mt-6">
-        Don't have an account?{" "}
-        <Link to={"/"} className="text-blue-600 hover:underline">
-          Sign Up
-        </Link>
-      </p>
-    </form>
+            <CardFooter className="border-t p-4">
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Logined In..." : "Login"}
+              </Button>
+            </CardFooter>
+          </form>
+          <p className="text-center text-gray-500 mt-2">
+            Already have an account?{" "}
+            <Link to={"/"} className="text-blue-600 hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </MagicCard>
+      </Card>
+    </div>
   );
 }
 

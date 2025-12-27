@@ -8,9 +8,9 @@ function DashboardData() {
   return (
     <DashboardLayout>
       <Routes>
-        <Route path="/" element={<Dashboard />} />        {/* /dashboard */}
-        <Route path="users" element={<Users />} />       {/* /dashboard/users */}
-        <Route path="settings" element={<Settings />} /> {/* /dashboard/settings */}
+        <Route path="/" element={<Dashboard />} />
+        <Route path="users" element={<Users />} />
+        <Route path="settings" element={<Settings />} />
       </Routes>
     </DashboardLayout>
   );

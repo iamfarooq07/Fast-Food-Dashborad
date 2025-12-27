@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function Navbar() {
   return (
-    <header className="h-16 w-full px-6 flex items-center justify-between bg-black border-b border-white/10">
+    <header className="h-16 w-full px-6 flex items-center justify-between bg-gray-800 border-b border-white/10">
       <h1 className="text-lg font-semibold text-white">Fast Food</h1>
 
       <div className="flex items-center gap-4">

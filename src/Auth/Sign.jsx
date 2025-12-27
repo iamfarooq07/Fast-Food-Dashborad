@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { MagicCard } from "@/components/ui/magic-card";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -34,56 +46,51 @@ function SignUp() {
   };
 
   return (
-    <form
-      onSubmit={signUp}
-      className="max-w-md mx-auto mt-16 p-8 bg-gray-800 shadow-md rounded-lg"
-    >
-      <h2 className="text-2xl font-bold mb-6 text-center">Create Account</h2>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <Card className="w-full max-w-sm border-none p-0 shadow-none">
+        <MagicCard className="p-4 bg-gray-800">
+          <CardHeader className="border-b p-4 text-center text-3xl font-bold">
+            <CardTitle>Sign Up</CardTitle>
+          </CardHeader>
 
-      <div className="mb-4">
-        <label className="block mb-1 font-medium text-white" htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+          <form onSubmit={signUp}>
+            <CardContent className="p-4 space-y-4">
+              <div>
+                <Label className="mb-2 text-lg">Email</Label>
+                <Input
+                  type="email"
+                  placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
-      <div className="mb-6">
-        <label className="block mb-1 font-medium text-white" htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+              <div>
+                <Label className="mb-2 text-lg">Password</Label>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </CardContent>
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 disabled:bg-blue-400"
-      >
-        {loading ? "Signing up..." : "Sign Up"}
-      </button>
-
-      <p className="text-center text-gray-500 mt-6">
-        Already have an account?{" "}
-        <Link to={"/login"} className="text-blue-600 hover:underline">
-          Login
-        </Link>
-      </p>
-    </form>
+            <CardFooter className="border-t p-4">
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Signing in..." : "Sign in"}
+              </Button>
+            </CardFooter>
+          </form>
+          <p className="text-center text-gray-500 mt-2">
+            Already have an account?{" "}
+            <Link to={"/login"} className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </p>
+        </MagicCard>
+      </Card>
+    </div>
   );
 }
 

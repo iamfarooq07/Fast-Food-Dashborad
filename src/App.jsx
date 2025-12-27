@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Auth/Login";
 import Sign from "./Auth/Sign";
 import DashboardData from "./DashboardData";
-
+import { MagicCard } from "@/components/ui/magic-card";
 function App() {
   return (
     <div>
